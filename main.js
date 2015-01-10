@@ -1,4 +1,16 @@
 // Write a cat model HERE!
+var Cat = function (name, current_room, points) {
+  this.name = name;
+  this.current_room = current_room;
+  this.points = points;
+  this.getPoints = function(){
+    return this.points;
+  }
+  this.changePoints = function(diff){
+    this.points = this.points + diff;
+    return this.points;
+  }
+}
 
 var Room = function (new_name, new_description, new_exits, new_points) {
   this.name = new_name;
@@ -41,6 +53,12 @@ var bedroom = new Room(
   20
 );
 
+var starbuck = new Cat(
+  "Starbuck";
+  kitchen;
+  5;
+);
+
 //
 // End fixture data!
 //
@@ -58,6 +76,13 @@ $(document).ready(function(){
     $("#living-room").click(function() {
       alert( living_room.getDescription() );
     });
+
+
+
+
+    $("").click(function() {
+
+    })
     // Add more!
   // }
 });
