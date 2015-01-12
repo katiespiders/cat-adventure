@@ -122,7 +122,9 @@ function runClick(id) {
   removeExits(allExits[0]);
   removeExits(allExits[1]);
 
-  addExits(allExits);
+  for(i = 0; i < starbuck.current_room.exits.length; i++) {
+    addExits(allExits[i], i);
+  }
 
   updatePoints();
 }
@@ -134,22 +136,20 @@ function removeExits(exit) {
   }
 }
 
-function addExits(allExits) {
-  for(i = 0; i < starbuck.current_room.exits.length; i++) {
-    // replaces spaces with hyphens & goes lower case--so Dining Room becomes dining-room
-    var id_string = starbuck.current_room.exits[i].split(' ').join('-').toLowerCase();
-    
-    // creates "run" span
-    var newExitRun = document.createElement("span");
-    updateElement(newExitRun, "run", id_string);
-    newExitRun.addEventListener("click", function(){runClick('run-' + id_string)}, false);
-    allExits[i].appendChild(newExitRun);
+function addExits(exit, i) {
+  // replaces spaces with hyphens & goes lower case--so Dining Room becomes dining-room
+  var id_string = starbuck.current_room.exits[i].split(' ').join('-').toLowerCase();
+  
+  // creates "run" span
+  var newExitRun = document.createElement("span");
+  updateElement(newExitRun, "run", id_string);
+  newExitRun.addEventListener("click", function(){runClick('run-' + id_string)}, false);
+  exit.appendChild(newExitRun);
 
-    var newExitLook = document.createElement("span");
-    updateElement(newExitLook, "look", id_string);
-    newExitLook.addEventListener("click", function(){lookClick('look-' + id_string)}, false);
-    allExits[i].appendChild(newExitLook);
-  }
+  var newExitLook = document.createElement("span");
+  updateElement(newExitLook, "look", id_string);
+  newExitLook.addEventListener("click", function(){lookClick('look-' + id_string)}, false);
+  exit.appendChild(newExitLook);
 }
 
 function updateElement(el, type, id) {
